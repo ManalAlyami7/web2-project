@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@200;300;400;500;600;800&family=Mada:wght@300;400;500&family=Raleway:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@500;600;700&display=swap');
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(11, 59, 84);
+}
+
+main {
+    height: 90%;
+    position: relative;
+    width: 100%;
+}
+
+main img {
+    max-width: 70%;
+    position: absolute;
+    top: 24%;
+    right: 10%;
+}
+
+.container {
+    height: 30%;
+    width: 40%;
+    background-color: white;
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    padding: 5%;
+    font-family: 'Raleway';
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    align-content: center;
+    flex-direction: column;
+}
+
+.container h1 {
+    margin-bottom: 0;
+}
+
+.container h1 span {
+    color: rgb(63, 121, 152);
+}
+
+.container .text {
+    margin-bottom: 30px;
+}
+
+.container .text p {
+    font-size: 1.2vw;
+    font-weight: 500;
+    margin-top: 3px;
+}
+
+.container .buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: start;
+    align-items: center;
+    align-content: center;
+}
+.container .login {
+    padding: 10px;
+    background-color: rgb(11, 59, 84);
+    color: white;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    width: 30%;
+    font-weight: 700;
+    margin-right: 15px;
+    transition-duration: 0.2s;
+
+}
+
+.container .signup {
+    font-weight: 600;
+    
+
+}
+
+.container .signup a {
+    color: rgb(54, 155, 210);
+    font-weight: 700;
+    transition-duration: 0.2s;
+}
+
+.login:hover {
+    background-color: rgb(33, 116, 160);
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.signup a:hover {
+    color: rgb(36, 111, 152);
+    transition-duration: 0.2s;
+}

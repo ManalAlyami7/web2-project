@@ -2,32 +2,47 @@
 <html>
 <head>
 <title>Sign up</title>
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/signup.css">
 </head>
 <body>
 <header>
-<img src = "comfortKey-logo.png" alt="">
+    <header> 
+        <div class="topnav">
+            <div class="logo">
+                <img src="img/comfortKey-logo.png" alt=""/>
+            </div>
+            <div class="navigation">
+                <a  href="homepage.html">Home Page</a>
+                <a class="active" href="signup.html">sign-up</a>
+                <a href="#login">log-in </a>
+            </div>
+            
+        </div>
+    </header>
 </header>
 <main>
 <h2>Sign up</h2>
 
-<div>
+<div class="container">
+    <div class="col">
 <div class="sign"><label>First name<br> <input type="text" ></label></div>
 <div class="sign"><label>Last name<br> <input type="text" ></label></div>
 <div class="sign"><label>age<br> <input type="text" ></label></div>
 </div>
 
-<div>
+<div class="col">
 <div class="sign"><label>Number of family members<br> <input type="text" ></label></div>
 <div class="sign"><label>income<br> <input type="text" ></label></div>
 <div class="sign"><label>job<br> <input type="text" ></label></div>
 </div>
 
-<div>
+<div class="col">
 <div class="sign"><label>Phone number<br> <input type="text" ></label></div>
 <div class="sign"><label>Email<br> <input type="text" ></label></div>
 <div class="sign"><label>Password<br> <input type="text" ></label></div>
 </div>
-
+</div>
 <button>Sign up</button>
 </main>
 </body>
