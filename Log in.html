@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Log in</title>
+</head>
+<body>
+<header>
+ <img src = "comfortKey-logo.png" alt="">
+</header>
+<main>
+<h2>Log in</h2>
+<form id="form1" action="">
+  <select id="menu" name="">
+  <option id="seeker" name="pk">home seeker</option>
+  <option id ="owner"  name="pk">home owner</option>
+  </select><br>
+  <input type="text" id="email" name="email" value="Email"><br>
+  
+  <input type="text" id="Password" name="Password" value="Password"><br>
+ <input type="button" value="Log in" onclick="hrefFunction()">
+</form> 
+</main>
+ <script>
+            
+            
+            
+            function hrefFunction(){
+			 if(document.getElementById("menu").selectedIndex == 0 )
+			
+               location.href = "homeseeker.html";
+				  if(document.getElementById("menu").selectedIndex == 1 )
+				 location.href = "homeowner.html";
+            }
+            
+           
+            
+         
+            
+        </script>
+</body>
+</html>
