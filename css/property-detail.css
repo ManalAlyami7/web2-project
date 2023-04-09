@@ -39,7 +39,6 @@ hr {
 h1 {
     color:rgb(15, 56, 77);
     font-size: 2.8vw;
-    margin-bottom: 30px;
 }
 
 .prop-details {
@@ -140,11 +139,16 @@ th {
 .table-btn {
     background-color: rgb(40, 82, 103);
     color: white;
-    padding: 10px 15px;
+    padding: 10px 100px;
     border-radius: 50px;
-    margin-left: 5px;
+    margin-left: 10px;
     text-align: center;
     transition-duration: 0.2s;
+    outline: none;
+    border: none;
+    font-family: 'Mada';
+    font-weight: 600;
+    margin-bottom: 30px;
 
 }
 
