@@ -2,94 +2,139 @@
 <html>
 <head>
 <title>Home Owner</title>
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/homeowner.css">
 </head>
 <body>
-<header>
-    
-<img src="img/comfortKey-logo.png" alt=""/>
-            
-<a href="homepage.html">log out </a>
-            
-            
-       
+  <header>
+   
+    <div class="topnav">
+        <div class="logo">
+          <a href="homeowner.html"><img src="img/comfortKey-logo.png" alt=""></a>
+        </div>
+        <div class="navigation">
+            <a href="#info" href="#">my info</a>
+            <a  href="#rental">Rental Applications</a>
+            <a  href="#Listed">Listed Properties</a>
+        </div>
+        
+    </div>
 </header>
 <main>
-<h2>Welcome Saleh</h2>
-<p> Name : Saleh <br> Phone Number: 055555555 <br> Email address: saleh_a@gmail.com</p>
 
-<table>
-<caption>Rental Applications</caption>
-<tr>
-<th>Property Name</th>
-<th>Location</th>
-<th>Applicant</th>
-<th>Status</th>
-</tr>
-<tr>
-<td rowspan="2"><a href="">Olaya Plaza</a></td>
-<td rowspan="2">Riyadh,Olaya Dist</td>
-<td><a href="">Sara Ahmed</a></td>
-<td>Under consideration</td>
-<td><a href ="">Accept</a> <br><a href ="">Decline</a> </td>
+  <div class="info-container" id="info">
+    <video id='vid' width="900" autoplay muted>
+        <source src="img/HomeHeader.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+      </video>      
+    <div class="info">
+        <h2>Welcome Ahmad!</h2>
+        <div class="info-details">
+            <div class="detail">
+                <p>First name:</p>
+                <p>Ahmad</p>
+            </div>
+            <div class="detail">
+                <p>Last name:</p>
+                <p>Alamri</p>
+            </div>
+            <div class="detail">
+                <p>Number of family members:</p>
+                <p>5</p>
+            </div>
+            <div class="detail">
+                <p>Phone number:</p>
+                <p>0505050505</p>
+            </div>
+            <div class="detail">
+                <p>Email address:</p>
+                <p>ahmad@gmail.com</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-</tr>
-<tr>
-    <td><a href="">Ali Mohammed</a></td>
-	<td>Under consideration</td>
-	<td><a href ="">Accept</a> <br><a href ="">Decline</a> </td>
+<div class="tables">
+  
+<table id="rental">
+  <caption>Rental Applications</caption>
+  <tr>
+  <th class="left-edge">Property Name</th>
+  <th>Location</th>
+  <th>Applicant</th>
+  <th>Status</th>
+  <th class="right-edge"></th>
   </tr>
-<tr>
-<td><a href="">Alnakheel home</a></td>
-<td>Riyadh,AlNakeel Dist</td>
-<td><a href="">Mohammed Saud</a></td>
-<td>Accepted</td>
-<td></td>
+  <tr>
+  <td rowspan="2"><a href="">Olaya Plaza</a></td>
+  <td rowspan="2">Riyadh,Olaya Dist</td>
+  <td><a href="">Sara Ahmed</a></td>
+  <td>Under consideration</td>
+  <td class="acc-dec"><a href ="" class="table-btn">Accept</a> <br><a class="table-btn" href ="">Decline</a> </td>
+  
+  </tr>
+  <tr>
+      <td><a href="">Ali Mohammed</a></td>
+    <td>Under consideration</td>
+    <td class="acc-dec"><a href ="" class="table-btn">Accept</a> <br><a href ="" class="table-btn">Decline</a> </td>
+    </tr>
+  <tr>
+  <td><a href="">Alnakheel home</a></td>
+  <td>Riyadh,AlNakeel Dist</td>
+  <td><a href="">Mohammed Saud</a></td>
+  <td>Accepted</td>
+  <td></td>
+  
+  </tr>
+  </table>
+  
+  <div class="Listed-prop">
+    <h2>Listed Properties</h2>
+  <a href="AddProperty.html" class="table-btn add">Add Property</a>
 
-</tr>
-</table>
+  </div>
+  <table id="Listed">
+ 
+  
+  <tr>
+  <th class="left-edge">Property Name</th>
+  <th>Category</th>
+  <th>Rent</th>
+  <th>Rooms</th>
+  <th>Location</th>
+  <th class="right-edge"></th>
+  </tr>
+  <tr>
+  <td><a href="">home plaza</a></td>
+  <td>Apartment</td>
+  <td>2500/month</td>
+  <td>4</td>
+  <td>Riyadh,Al-Narjes Dist</td>
+  <td><a href ="" class="table-btn">Delete</a></td>
+  
+  </tr>
+  <tr>
+  <td><a href="">Holiday Villa</a></td>
+  <td>villa</td>
+  <td>7000/month</td>
+  <td>6</td>
+  <td>Riyadh,Al-Aqeeq Dist</td>
+  <td ><a class="table-btn" href ="">Delete</a></td>
+  </tr>
+  
+  <tr>
+  <td><a href="">Rawabi square</a></td>
+  <td>Appartment</td>
+  <td>l000/month</td>
+  <td>4</td>
+  <td>Riyadh,Al-Rawabi Dist</td>
+  <td><a href ="" class="table-btn">Delete</a></td>
+  </tr>
+  
+  
+  </table>
+</div>
 
-<a href="AddProperty.html">Add Property</a>
-
-<table>
-
-<caption>Listed Properties</caption>
-
-<tr>
-<th>Property Name</th>
-<th>Category</th>
-<th>Rent</th>
-<th>Rooms</th>
-<th>Location</th>
-</tr>
-<tr>
-<td><a href="">home plaza</a></td>
-<td>Apartment</td>
-<td>2500/month</td>
-<td>4</td>
-<td>Riyadh,Al-Narjes Dist</td>
-<td><a href ="">Delete</a></td>
-
-</tr>
-<tr>
-<td><a href="">Holiday Villa</a></td>
-<td>villa</td>
-<td>7000/month</td>
-<td>6</td>
-<td>Riyadh,Al-Aqeeq Dist</td>
-<td><a href ="">Delete</a></td>
-</tr>
-
-<tr>
-<td><a href="">Rawabi square</a></td>
-<td>Appartment</td>
-<td>l000/month</td>
-<td>4</td>
-<td>Riyadh,Al-Rawabi Dist</td>
-<td><a href ="">Delete</a></td>
-</tr>
-
-
-</table>
 </main>
 </body>
 </html>

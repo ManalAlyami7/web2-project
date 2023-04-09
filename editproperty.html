@@ -2,32 +2,84 @@
 <html>
 <head>
 <title>edit property</title>
+<link rel="stylesheet" href="css/editproperty.css">
+<link rel="stylesheet" href="css/navbar.css">
 </head>
+
 <body>
 <header>
     
-<img src="img/comfortKey-logo.png" alt=""/>
+    <header>
+   
+        <div class="topnav">
+            <div class="logo">
+                <a href="homeowner.html"><img src="img/comfortKey-logo.png" alt=""></a>
+            </div>
+            <div class="navigation">
+                <a  href="homeowner.html">Back</a>
+                <a  href="homeowner.html">Log out</a>
+                
+            </div>
             
-<a href="homepage.html">log out </a>
-            
-            
+        </div>
+</header>    
        
 </header>
 <main>
-<h2>Olaya Plaza</h2>
-<h3>Property information:</h3>
-<p>Property Name:Olaya Plaza <br>Category:Appartment <br>Number of rooms:5 <br>Rent:3000 <br>Location:Riyadh , Olaya dist <br>Max number of tenants:1
-<br>description:beautiful appartment......</p>
-a href="">Upload images </a>
-<h3>Property images:</h3>
+    <h2>Edit my Property</h2>
 
-<img src="img/appa.jpeg" alt=""/>
-<a href="">Delete</a>
-<img src="img/appa.jpeg" alt=""/>
-<a href="">Delete</a>
-<img src="img/appa.jpeg" alt=""/>
-<a href="">Delete</a>
-<button>Save</button>
+<div class="forms">
+    <form action="">
+
+        <div class="container">
+                <div class="col">
+                    <div class="sign"><label>Property Name<br> <input type="text" value="Olaya Plaza" ></label></div>
+                    <div class="sign"><label>Category<br> <input type="text" value="Appartment"></label></div>
+                    <div class="sign"><label>Number of Rooms<br> <input type="text" value="5"></label></div>
+                    <div class="sign"><label>Rent<br> <input type="text" value="3000"></label></div>
+                    
+                    
+                    
+                    </div>
+                    
+                    <div class="col">
+                    <div class="sign"><label>Location<br> <input type="text" value="Riyadh, Olaya dist "></label></div>
+                    <div class="sign"><label>Max number of tenants<br> <input type="text" value="1"></label></div>
+                    <div class="sign"><label>description<br> <input type="text" value="beautiful appartment......"></label></div>
+                    <div class="sign"><label class="upload">upload pictures of the property<br> <input type="file" class="file-input" accept="image/png, image/gif, image/jpeg" name="image"></label></div>
+                    
+                    </div>
+            
+        
+        </div>
+</form>
+
+<div class="images">
+    <table>
+        <tr>
+            <th class="left-edge">images</th>
+            <th class="right-edge"></th>
+        </tr>
+        <tr>
+            <td><img src="img/appa.jpeg" alt=""/></td>
+            <td><a class="table-btn"href="">Delete</a>
+            </td>
+        </tr>
+        <tr>
+            <td><img src="img/appa.jpeg" alt=""/></td>
+            <td><a class="table-btn"href="">Delete</a>
+            </td>
+        </tr>
+        <tr>
+            <td><img src="img/appa.jpeg" alt=""/></td>
+            <td><a class="table-btn"href="">Delete</a>
+        </tr>
+    </table>
+    
+</div>
+</div>
+    
+<button class="save">Save</button>
 </main>
 </body>
 </html>
