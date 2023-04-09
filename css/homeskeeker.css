@@ -17,6 +17,7 @@ main {
     min-width: 100%;
     margin: 0;
     padding: 0;
+    
 
 }
 
@@ -99,10 +100,9 @@ main .info-container {
     margin-top: 10vh;
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    padding-left: 50px;
 
 }
 table {
@@ -164,6 +164,9 @@ label {
     font-family: 'Mada';
     color: rgb(11, 58, 84);
     font-weight: 600;
+    align-self: start;
+    justify-self: start;
+    padding-left: 5vw;
 }
 
 select {
