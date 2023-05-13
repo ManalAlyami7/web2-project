@@ -96,7 +96,7 @@ form {
 
 }
 
-form input[type= "button"] {
+form input[type= "submit"] {
     padding: 15px;
     background-color: rgb(11, 59, 84);
     color: white;
@@ -111,8 +111,21 @@ form input[type= "button"] {
     margin-top: 30px;
 }
 
-form input[type= "button"]:hover {
+form input[type= "submit"]:hover {
     background-color: rgb(33, 116, 160);
     transition-duration: 0.2s;
     cursor: pointer;
+}
+
+.warning {
+    background-color: rgb(255, 194, 194);
+    color: red;
+    border: solid 1px red;
+    padding: 5px;
+    text-align: center;
+    justify-self: center;
+    width: 50%;
+    margin-top: 5vh;
+    border-radius: 50px;
+
 }

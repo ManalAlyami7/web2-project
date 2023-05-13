@@ -118,3 +118,16 @@ form input[type="submit"]:hover {
     transition-duration: 0.2s;
     cursor: pointer;
 }
+
+.warning {
+    background-color: rgb(255, 194, 194);
+    color: red;
+    border: solid 1px red;
+    padding: 5px;
+    text-align: center;
+    justify-self: center;
+    width: 50%;
+    margin-top: 5vh;
+    border-radius: 50px;
+
+}
