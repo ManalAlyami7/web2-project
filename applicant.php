@@ -33,7 +33,7 @@ while($row = mysqli_fetch_assoc($result2)){
    
             <div class="topnav">
                 <div class="logo">
-                    <a href="homeowner.php"><img src="images/comfortKey-logo.png" alt=""></a>
+                    <a href="homeowner.php"><img src="img/comfortKey-logo.png" alt=""></a>
                 </div>
                 <div class="navigation">
                     <a  href="homeowner.php">Back</a>
@@ -44,7 +44,7 @@ while($row = mysqli_fetch_assoc($result2)){
             </div>
     </header>
     <main>
-        <img src="images/key_door_open1.jpg" alt="">
+        <img src="img/key_door_open1.jpg" alt="">
     <hr>
     <h1>Applicant Details</h1>
     <div class="attributes">
