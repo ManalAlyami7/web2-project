@@ -11,7 +11,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
 if(isset($_GET['id'])){
 $id=$_GET['id'];
     include 'db.con.php';
-$query1 = "SELECT  `first_name`, `last_name`, `family_member`, `phone_number`, `email_address` FROM `homeseeker` WHERE id='$id'";}
+$query1 = "SELECT * FROM `homeseeker` WHERE id='$id'";}
     $result2 = mysqli_query($conn,$query1);
 while($row = mysqli_fetch_assoc($result2)){
     
@@ -33,7 +33,7 @@ while($row = mysqli_fetch_assoc($result2)){
    
             <div class="topnav">
                 <div class="logo">
-                    <a href="homeowner.php"><img src="img/comfortKey-logo.png" alt=""></a>
+                    <a href="homeowner.php"><img src="images/comfortKey-logo.png" alt=""></a>
                 </div>
                 <div class="navigation">
                     <a  href="homeowner.php">Back</a>
@@ -44,7 +44,7 @@ while($row = mysqli_fetch_assoc($result2)){
             </div>
     </header>
     <main>
-        <img src="img/key_door_open1.jpg" alt="">
+        <img src="images/key_door_open1.jpg" alt="">
     <hr>
     <h1>Applicant Details</h1>
     <div class="attributes">
@@ -74,6 +74,14 @@ while($row = mysqli_fetch_assoc($result2)){
                 <p><?php echo $row['family_member'];?></p>
             </div>
         </div>
+        <div class="attr">
+            <div  class="att">
+                <h4>Age</h4>
+            </div>
+            <div class="detail">
+                <p><?php echo $row['age'];?></p>
+            </div>
+        </div>
         
         <div class="attr">
             <div  class="att">
@@ -92,6 +100,23 @@ while($row = mysqli_fetch_assoc($result2)){
                 <p><?php echo $row['email_address'];?></p>
             </div>
         </div>
+        <div class="attr">
+            <div  class="att">
+                <h4>Income</h4>
+            </div>
+            <div class="detail">
+                <p><?php echo $row['income'];?></p>
+            </div>
+        </div>
+        <div class="attr">
+            <div  class="att">
+                <h4>Job</h4>
+            </div>
+            <div class="detail">
+                <p><?php echo $row['job'];?></p>
+            </div>
+        </div>
+
     </div>
 
     </main>
