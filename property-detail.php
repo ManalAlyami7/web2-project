@@ -7,11 +7,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
  ?>
 <?php
 
-   /* $queries = [];
-    parse_str($_SERVER['QUERY_STRING'], $queries);
-    $id= $queries['id'];*/
+   
 $id= $_GET['id'];
-$id = '1234';
+ 
+#$id = '1234';
     include 'db.con.php';   
     $query1 = "SELECT name, rooms, rent_cost ,location ,max_tenants ,description  FROM Property WHERE id= '$id'";
     $result2 = mysqli_query($conn, $query1);
