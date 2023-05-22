@@ -6,7 +6,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
     if($_SESSION['role'] == 'homeowner') {
 
  ?>
-
+<?php
+  
+if(isset($_GET['id'])){
+$id=$_GET['id'];
+    include 'db.con.php';
+$query1 = "SELECT  `first_name`, `last_name`, `family_member`, `phone_number`, `email_address` FROM `homeseeker` WHERE id='$id'";}
+    $result2 = mysqli_query($conn,$query1);
+while($row = mysqli_fetch_assoc($result2)){
+    
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,7 +33,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
    
             <div class="topnav">
                 <div class="logo">
-                    <a href="homeowner.php"><img src="img/comfortKey-logo.png" alt=""></a>
+                    <a href="homeowner.php"><img src="images/comfortKey-logo.png" alt=""></a>
                 </div>
                 <div class="navigation">
                     <a  href="homeowner.php">Back</a>
@@ -35,7 +44,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
             </div>
     </header>
     <main>
-        <img src="img/key_door_open1.jpg" alt="">
+        <img src="images/key_door_open1.jpg" alt="">
     <hr>
     <h1>Applicant Details</h1>
     <div class="attributes">
@@ -44,7 +53,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                 <h4>First Name</h4>
             </div>
             <div class="detail">
-                <p>Ahmed</p>
+                <p><?php echo $row['first_name'];?></p>
             </div>
         </div>
         
@@ -53,7 +62,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                 <h4>Last Name</h4>
             </div>
             <div class="detail">
-                <p>Al Swailem</p>
+                <p><?php echo $row['last_name'];?></p>
             </div>
         </div>
         
@@ -62,7 +71,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                 <h4>Number of family members</h4>
             </div>
             <div class="detail">
-                <p>5 members</p>
+                <p><?php echo $row['family_member'];?></p>
             </div>
         </div>
         
@@ -71,7 +80,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                 <h4>Phone Number</h4>
             </div>
             <div class="detail">
-                <p>+966 5302 98721</p>
+                <p><?php echo $row['phone_number'];?></p>
             </div>
         </div>
         
@@ -80,16 +89,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                 <h4>Email Address</h4>
             </div>
             <div class="detail">
-                <p>Ahmedalswailem@gmail.com</p>
+                <p><?php echo $row['email_address'];?></p>
             </div>
         </div>
     </div>
 
     </main>
-    
     </body>
     
    </html>
+<?php } ?>
 
    <?php 
 
@@ -100,4 +109,3 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
     header('Location: homepage.php');
 }
 
- ?>
