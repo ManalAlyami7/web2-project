@@ -68,12 +68,12 @@ if(isset($_GET["method"])){
     if ($_GET["method"] == 'accept' || $_GET["method"] == 'decline') {
       $application_id = $_GET["A_id"];
       if ($_GET["method"] == 'accept') {
-        $query = "UPDATE RentalApplication SET application_status_id = 000 WHERE id = $application_id";
+        $query = "UPDATE RentalApplication SET application_status_id = '0000' WHERE id = '$application_id'";
         mysqli_query($conn, $query);
-        $query = "UPDATE RentalApplication SET application_status_id = 001  WHERE property_id = $property_id AND id != $application_id";
+        $query = "UPDATE RentalApplication SET application_status_id = '0001'  WHERE property_id = '$property_id' AND id != '$application_id'";
         mysqli_query($conn, $query);
       } else {
-        $query = "UPDATE RentalApplication SET application_status_id = 001 WHERE id = $application_id";
+        $query = "UPDATE RentalApplication SET application_status_id = '0001' WHERE id = '$application_id'";
         mysqli_query($conn, $query);
       }
     } else if ($_GET["method"] == 'delete') {
