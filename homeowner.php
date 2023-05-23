@@ -1,24 +1,96 @@
-<?php 
-
-session_start();
-
-if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
-    if($_SESSION['role'] == 'homeowner') {
-
- ?>
-
 <!DOCTYPE html>
 <html>
 <head>
 <title>Home Owner</title>
 <link rel="stylesheet" href="css/navbar.css">
 <link rel="stylesheet" href="css/homeowner.css">
-<link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="icon/avicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
-        <link rel="manifest" href="icon/site.webmanifest">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="avicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
 </head>
 <body>
+    <?php
+    session_start();
+    
+
+    if (!isset($_SESSION['id']) ) {
+      header('Location: homepage.php');
+      exit;
+    }
+    if (!isset($_SESSION['role']) ) {
+        header('Location: homepage.php');
+        exit;
+      }
+      if ($_SESSION['role'] != 'homeowner') {
+        header('Location: homepage.php');
+        exit;
+      }
+       include 'db.con.php';
+
+      $userId = $_SESSION['id'];
+      echo "ds";
+
+$query1 = "SELECT * FROM homeowner WHERE id=$userId";
+$result = mysqli_query($conn, $query1);
+
+echo "ds";
+
+$owner = mysqli_fetch_assoc($result);
+$query1 = "SELECT
+             Property.name AS property_name,
+             Property.location AS property_location,
+             CONCAT(HomeSeeker.first_name, ' ', HomeSeeker.last_name) AS applicant_name,
+             ApplicationStatus.status AS application_status,
+             RentalApplication.id AS application_id,
+             RentalApplication.property_id AS property_id,
+             RentalApplication.home_seeker_id AS applicant_id
+           FROM
+             RentalApplication
+             JOIN Property ON RentalApplication.property_id = Property.id
+             JOIN HomeSeeker ON RentalApplication.home_seeker_id = HomeSeeker.id
+             JOIN ApplicationStatus ON RentalApplication.application_status_id = ApplicationStatus.id
+           WHERE
+             Property.homeowner_id = $userId";
+$resultTab1 = mysqli_query($conn, $query1);
+
+
+$query2 = "SELECT p.id, p.name, pc.category, p.rent_cost, p.rooms, p.location
+          FROM Property p
+          INNER JOIN PropertyCategory pc ON p.property_category_id = pc.id
+          WHERE p.id NOT IN (
+            SELECT property_id
+            FROM RentalApplication
+            WHERE application_status_id = 002
+          )
+          AND p.homeowner_id = $userId";
+$resultTab2 = mysqli_query($conn, $query2);
+if(isset($_GET["method"])){
+    $property_id = $_GET["P_id"];
+    if ($_GET["method"] == 'accept' || $_GET["method"] == 'decline') {
+      $application_id = $_GET["A_id"];
+      if ($_GET["method"] == 'accept') {
+        $query = "UPDATE RentalApplication SET application_status_id = 000 WHERE id = $application_id";
+        mysqli_query($connect, $query);
+        $query = "UPDATE RentalApplication SET application_status_id = 001 
+        WHERE property_id = $property_id
+        AND id != $application_id";
+        mysqli_query($connect, $query);
+      } else {
+        $query = "UPDATE RentalApplication SET application_status_id = 001 WHERE id = $application_id";
+        mysqli_query($connect, $query);
+      }
+    } else if ($_GET["method"] == 'delete') {
+      $query = "DELETE FROM rentalapplication WHERE property_id=$property_id";
+      mysqli_query($connect, $query);
+      $query = "DELETE FROM propertyimage WHERE property_id=$property_id";
+      mysqli_query($connect, $query);
+      $query = "DELETE FROM property WHERE id=$property_id";
+      mysqli_query($connect, $query);
+    }
+    header('location:homeowner.php');
+}
+    ?>
   <header>
    
     <div class="topnav">
@@ -40,24 +112,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
       Your browser does not support the video tag.
       </video>      
     <div class="info">
-        <h2>Welcome Ahmad!</h2>
+        <h2>Welcome <?php echo $owner['name']; ?>!</h2>
         <div class="info-details">
             <div class="detail">
-                <p>First name:</p>
-                <p>Ahmad</p>
-            </div>
-            <div class="detail">
-                <p>Last name:</p>
-                <p>Alamri</p>
+                <p>name:</p>
+                <p><?php echo $owner['name']; ?></p>
             </div>
             
             <div class="detail">
                 <p>Phone number:</p>
-                <p>0505050505</p>
+                <p><?php echo $owner['phone_number']; ?></p>
             </div>
             <div class="detail">
                 <p>Email address:</p>
-                <p>ahmad@gmail.com</p>
+                <p><?php echo $owner['email_address']; ?></p>
+
             </div>
         </div>
     </div>
@@ -73,28 +142,25 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
   <th>Applicant</th>
   <th>Status</th>
   <th class="right-edge"></th>
-  </tr>
-  <tr>
-  <td rowspan="2"><a href="property-detail.php">Olaya Plaza</a></td>
-  <td rowspan="2">Riyadh,Olaya Dist</td>
-  <td><a href="applicant.php">Sara Ahmed</a></td>
-  <td>Under consideration</td>
-  <td class="acc-dec"><a href ="" class="table-btn">Accept</a> <br><a class="table-btn" href ="">Decline</a> </td>
-  
-  </tr>
-  <tr>
-      <td><a href="">Ali Mohammed</a></td>
-    <td>Under consideration</td>
-    <td class="acc-dec"><a href ="" class="table-btn">Accept</a> <br><a href ="" class="table-btn">Decline</a> </td>
-    </tr>
-  <tr>
-  <td><a href="">Alnakheel home</a></td>
-  <td>Riyadh,AlNakeel Dist</td>
-  <td><a href="">Mohammed Saud</a></td>
-  <td>Accepted</td>
-  <td></td>
-  
-  </tr>
+  <?php
+                while($property = mysqli_fetch_assoc($resultTab1)) {
+                    echo "<tr>";
+                    echo "<td><a href='property-detail.php?id=" . $property["property_id"] . "'>" . $property["property_name"] . "</a></td>";
+                    echo "<td>" . $property["property_location"] . "</td>";
+                    echo "<td><a href='applicant.php?id=" . $property["applicant_id"] . "'>" . $property["applicant_name"] . "</a></td>";
+                    echo "<td>" . $property["application_status"] . "</td>";
+                    echo "<td>";
+                    if ($property["application_status"] == "under consideration") {
+                        echo "<a href='homeowner.php?method=decline&A_id=".$property["application_id"]."&P_id=". $property["property_id"]."'>decline </a>";
+                        echo "<a href='homeowner.php?method=accept&A_id=".$property["application_id"]."&P_id=". $property["property_id"]."'>accept</a>";
+                        
+                    }
+                    echo "</td>";
+                    echo "</tr>";
+        
+                }
+                ?>
+ 
   </table>
   
   <div class="Listed-prop">
@@ -113,32 +179,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
   <th>Location</th>
   <th class="right-edge"></th>
   </tr>
-  <tr>
-  <td><a href="">home plaza</a></td>
-  <td>Apartment</td>
-  <td>2500/month</td>
-  <td>4</td>
-  <td>Riyadh,Al-Narjes Dist</td>
-  <td><a href ="" class="table-btn">Delete</a></td>
-  
-  </tr>
-  <tr>
-  <td><a href="">Holiday Villa</a></td>
-  <td>villa</td>
-  <td>7000/month</td>
-  <td>6</td>
-  <td>Riyadh,Al-Aqeeq Dist</td>
-  <td ><a class="table-btn" href ="">Delete</a></td>
-  </tr>
-  
-  <tr>
-  <td><a href="">Rawabi square</a></td>
-  <td>Appartment</td>
-  <td>l000/month</td>
-  <td>4</td>
-  <td>Riyadh,Al-Rawabi Dist</td>
-  <td><a href ="" class="table-btn">Delete</a></td>
-  </tr>
+  <?php
+                 while ($property = mysqli_fetch_assoc($resultTab2)) {
+                    echo "<tr>";
+                    echo "<td><a href='property-detail.php?id=" . $property['id'] . "'>" . $property['name'] . "</a></td>";
+                    echo "<td>" . $property['category'] . "</td>";
+                    echo "<td>" . $property['rent_cost'] . "</td>";
+                    echo "<td>" . $property['rooms'] . "</td>";
+                    echo "<td>" . $property['location'] . "</td>";
+                    echo "<td><a href='homeowner.php?method=delete&A_id=".$property["id"]."'>delete</a></td>";
+                    
+                    echo "</tr>";
+                }
+            
+                ?>
   
   
   </table>
@@ -147,14 +201,3 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
 </main>
 </body>
 </html>
-
-<?php 
-
-
-} else {
-    header('Location: homepage.php');
-} } else {
-  header('Location: homepage.php');
-}
-
- ?>
