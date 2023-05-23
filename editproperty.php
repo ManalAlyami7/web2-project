@@ -4,6 +4,7 @@ session_start();
 
 if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
     if($_SESSION['role'] == 'homeowner') {
+        $prop_id = $_GET['id'];
 
  ?>
 
@@ -29,7 +30,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                 <a href="homeowner.php"><img src="img/comfortKey-logo.png" alt=""></a>
             </div>
             <div class="navigation">
-                <a  href="property-detail.php">Back</a>
+                <?php echo "<a  href='property-detail.php?id=$prop_id'>Back</a>" ?>
                 <a  href="logout.php">Log out</a>
                 
             </div>
@@ -48,7 +49,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                 <div class="col">
                     <?php 
                     include "db.con.php";
-                        $prop_id = 1234;
                         $sql = "SELECT * FROM property WHERE id = '$prop_id'";
                         $result = mysqli_query($conn, $sql);
                         $row =mysqli_fetch_array($result);
@@ -92,7 +92,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
             echo "
             <tr>
                 <td><img src='$path' alt=''/></td>
-                <td><a class='table-btn' href='editproperty.php?img_delete=$img_id&img_path=$path'>Delete</a>
+                <td><a class='table-btn' href='editproperty.php?id=$prop_id&img_delete=$img_id&img_path=$path'>Delete</a>
                 </td>
             </tr>";
         }

@@ -170,8 +170,7 @@ while($row = mysqli_fetch_assoc($result2)){
                 ?>
                 
                     <td><img src="<?php echo $row2['path']; ?>" alt=""/></td>
-                    <td><img src="<?php echo $row2['path']; ?>" alt=""/></td>
-                    <td><img src="<?php echo $row2['path']; ?>" alt=""/></td>
+                    
                <?php     } ?>
                 </tr>
             </table>
