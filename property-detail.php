@@ -5,13 +5,41 @@ session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
 
  ?>
-<?php
 
    
-$id= $_GET['id'];
- 
-#$id = '1234';
-    include 'db.con.php';   
+ <?php
+     include 'db.con.php';   
+
+    $m="SELECT id FROM applicationstatus WHERE status= 'under consideration'";
+    $c= mysqli_query($conn, $m);
+    if(mysqli_num_rows($c)==1){
+        $b= mysqli_fetch_assoc($c);
+        $vs=$b['id'];
+    }
+    ?>
+<?php
+if (isset($_GET['apply_id'])) {
+            $property_id = (int) $_GET['apply_id'];
+$property_id='1234';
+            $sql = "SELECT id FROM rentalapplication WHERE property_id=$property_id and home_seeker_id={$_SESSION['id']}";
+
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) == 0) {
+                $sql = "SELECT id FROM rentalapplication ORDER BY id DESC LIMIT 1";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($result);
+                   $id1 = (int) str_replace('ra', '', $row['id']) + 1;
+                $id1 = 'ra' . str_pad($id, 3, '0', STR_PAD_LEFT);
+
+
+
+                $sql = "INSERT INTO rentalapplication 
+                        (id, property_id, home_seeker_id, application_status_id) VALUE
+                        ('$id1',$property_id,{$_SESSION['id']},'$vs')";
+                mysqli_query($conn, $sql);
+
+}}
+ $id= $_GET['id'];
     $query1 = "SELECT name, rooms, rent_cost ,location ,max_tenants ,description  FROM Property WHERE id= '$id'";
     $result2 = mysqli_query($conn, $query1);
     if($_SESSION['role']=='homeseeker') {
@@ -152,18 +180,16 @@ while($row = mysqli_fetch_assoc($result2)){
     </div>
 <?php
     if($_SESSION['role']=='homeseeker'){
-         $x = "SELECT home_seeker_id FROM RentalApplication WHERE property_id ='$id'";
+        $seeker=$_SESSION['id'];
+         $x = "SELECT * FROM RentalApplication WHERE home_seeker_id = '$seeker' AND property_id ='$id'";
         
     $s=mysqli_query($conn, $x);
-    $row1 = mysqli_fetch_assoc($s);
-        
-    $n=$_SESSION['id'];
-    if($_SESSION['id']==$row1['home_seeker_id'] ){
+        if(mysqli_num_rows($s)==0){
+            echo "<div class='attr'>"." <a href='homeseeker.php?apply_id=$id'>". "<button id='apply' class='table-btn'>Apply</button></a></div>";
+
     }
-    else{
-    echo "<div class='attr'><a href='homeseeker.php' ><button id='apply' class='table-btn'>Apply</button></a></div>";
-     
-  }
+  
+    
     echo "<h4>HOMEOWNER DETAILS</h4>";
 
 if(mysqli_num_rows($result3)==1){
@@ -184,21 +210,14 @@ if(mysqli_num_rows($result3)==1){
 
 ?>
     </main>
-    <?php
-    $m="SELECT id FROM applicationstatus WHERE status= 'under consideration'";
-    $c= mysqli_query($conn, $m);
-    if(mysqli_num_rows($c)==1){
-        $b= mysqli_fetch_assoc($c);
-        $vs=$b['id'];
-    }
-    ?>
-     <script> $(document).ready(function() {
+   
+   <!--  <script> $(document).ready(function() {
     $('#apply').click(function() {
         
-  <?php $number= rand();
-  mysqli_query($conn, "INSERT INTO `rentalapplication`(`id`, `property_id`, `home_seeker_id`, `application_status_id`) VALUES ('$number','$id','$n','$vs')"); ?>
+  <?php /*$number= rand();
+  mysqli_query($conn, "INSERT INTO `rentalapplication`(`id`, `property_id`, `home_seeker_id`, `application_status_id`) VALUES ('$number','$id','$n','$vs')");*/ ?>
       });
-      }); </script>
+      }); </script>-->
     </body>
    </html>
 
