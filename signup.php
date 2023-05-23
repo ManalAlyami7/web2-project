@@ -97,7 +97,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($result) {
 
-
+                session_start();
                 $_SESSION['id'] =$id;
 
                 $_SESSION['role'] = "homeseeker";

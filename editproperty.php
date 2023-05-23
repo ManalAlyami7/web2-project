@@ -162,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
             
-    header('Location: editproperty.php');
+    header("Location: property-detail.php?id=$prop_id");
  
     
         

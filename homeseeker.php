@@ -65,13 +65,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                         Your browser does not support the video tag.
                     </video>
                     <?php
-                    $sql = "SELECT * FROM homeseeker WHERE id='{$_SESSION['id']}'";
+                    $id = $_SESSION['id'];
+                    $sql = "SELECT * FROM homeseeker WHERE id='$id'";
                     $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_assoc($result);
                     ?>
                     <div class="info">
                         <h2>Welcome
-                            <?php echo $row['first_name'] ?>!
+                            <?php echo $id ?>!
                         </h2>
                         <div class="info-details">
                             <div class="detail">
@@ -204,6 +205,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
 
 
                         $result = mysqli_query($conn, $sql);
+                        if($result) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             ?>
                             <tr>
@@ -225,7 +227,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                                 <td class="apply"><a href="?apply_id=<?php echo $row['id'] ?>">Apply</a></td>
 
                             </tr>
-                        <?php } ?>
+                        <?php } } ?>
 
                     </table>
                 </div>
