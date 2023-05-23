@@ -138,3 +138,41 @@ input[type="submit"]:hover, .upload:hover {
 .file-input {
     display: none;
 }
+
+
+input, select {
+    padding: 10px;
+    width: 100%; 
+    border: none;
+    outline: none;
+    border-bottom: solid 2px rgb(11, 59, 84);
+    background-color: rgb(238, 244, 248);
+    transition-duration: 0.2s;
+    font-weight: 600;
+    font-family: 'Mada';
+    color: rgba(11, 58, 84, 0.627);
+    
+
+}
+
+select option {
+    border-radius: 0;
+    font-weight: 600;
+    font-family: 'Mada';
+    color: rgb(11, 58, 84);
+
+    padding: 20px;
+}
+
+.warning {
+    background-color: rgb(255, 194, 194);
+    color: red;
+    border: solid 1px red;
+    padding: 5px;
+    text-align: center;
+    justify-self: center;
+    width: 50%;
+    margin-top: 5vh;
+    border-radius: 50px;
+
+}

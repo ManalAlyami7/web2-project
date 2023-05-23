@@ -73,39 +73,41 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['user'])
     $pass = validate($_POST['password']);
 
     if (empty($email)) {
-        // header("Location: login.php?error=username is required");
+      echo '<div class="warning"><p>missing fields</p></div>';
 
         exit();
 
     }else if(empty($pass)){
 
-        // header("Location: login.php?error=Password is required");
+      echo '<div class="warning"><p>missing fields</p></div>';
 
         exit();
 
     }else{
 
-      $sql = "SELECT * FROM homeseeker WHERE email_address='$email' AND password='$pass'";
+      
+
+      $sql = "SELECT * FROM homeseeker WHERE email_address='$email'";
         $location = "Location: homeseeker.php";
       $location ='';
       if($_POST["user"] == 'homeseeker') {
-        $sql = "SELECT * FROM homeseeker WHERE email_address='$email' AND password='$pass'";
+        $sql = "SELECT * FROM homeseeker WHERE email_address='$email'";
         $location = "Location: homeseeker.php";
       } else if ($_POST["user"] == 'homeowner') {
-        $sql = "SELECT * FROM homeowner WHERE email_address='$email' AND password='$pass'";
+        $sql = "SELECT * FROM homeowner WHERE email_address='$email'";
         $location = "Location: homeowner.php";
       }
 
 
         
-
+        
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) === 1) {
 
             $row = mysqli_fetch_assoc($result);
 
-            if ($row['email_address'] === $email && $row['password'] === $pass) {
+            if ($row['email_address'] === $email && (password_verify($pass, $row['password']))) {
 
                 $_SESSION['id'] = $row['id'];
 
