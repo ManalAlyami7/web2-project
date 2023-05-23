@@ -29,12 +29,10 @@
        include 'db.con.php';
 
       $userId = $_SESSION['id'];
-      echo "ds";
 
 $query1 = "SELECT * FROM homeowner WHERE id=$userId";
 $result = mysqli_query($conn, $query1);
 
-echo "ds";
 
 $owner = mysqli_fetch_assoc($result);
 $query1 = "SELECT
@@ -71,22 +69,20 @@ if(isset($_GET["method"])){
       $application_id = $_GET["A_id"];
       if ($_GET["method"] == 'accept') {
         $query = "UPDATE RentalApplication SET application_status_id = 000 WHERE id = $application_id";
-        mysqli_query($connect, $query);
-        $query = "UPDATE RentalApplication SET application_status_id = 001 
-        WHERE property_id = $property_id
-        AND id != $application_id";
-        mysqli_query($connect, $query);
+        mysqli_query($conn, $query);
+        $query = "UPDATE RentalApplication SET application_status_id = 001  WHERE property_id = $property_id AND id != $application_id";
+        mysqli_query($conn, $query);
       } else {
         $query = "UPDATE RentalApplication SET application_status_id = 001 WHERE id = $application_id";
-        mysqli_query($connect, $query);
+        mysqli_query($conn, $query);
       }
     } else if ($_GET["method"] == 'delete') {
       $query = "DELETE FROM rentalapplication WHERE property_id=$property_id";
-      mysqli_query($connect, $query);
+      mysqli_query($conn, $query);
       $query = "DELETE FROM propertyimage WHERE property_id=$property_id";
-      mysqli_query($connect, $query);
+      mysqli_query($conn, $query);
       $query = "DELETE FROM property WHERE id=$property_id";
-      mysqli_query($connect, $query);
+      mysqli_query($conn, $query);
     }
     header('location:homeowner.php');
 }
@@ -187,7 +183,7 @@ if(isset($_GET["method"])){
                     echo "<td>" . $property['rent_cost'] . "</td>";
                     echo "<td>" . $property['rooms'] . "</td>";
                     echo "<td>" . $property['location'] . "</td>";
-                    echo "<td><a href='homeowner.php?method=delete&A_id=".$property["id"]."'>delete</a></td>";
+                    echo "<td><a href='homeowner.php?method=delete&P_id=".$property["id"]."'>delete</a></td>";
                     
                     echo "</tr>";
                 }
