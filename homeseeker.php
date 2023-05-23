@@ -207,7 +207,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             ?>
                             <tr>
-                                <td><a href="#">
+                                <td><a href="property-detail.php?id=<?php echo $row['id'] ?>">
                                         <?php echo $row['name'] ?>
                                     </a></td>
                                 <td>
