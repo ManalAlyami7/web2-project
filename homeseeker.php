@@ -28,7 +28,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
 
             header('Location: homeseeker.php');
             exit();
-        }
+        } 
         ?>
 
         <!DOCTYPE html>
@@ -165,7 +165,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
 
                     <table id="homes">
 
-                    <form>
+                    <form class="search">
                         <caption>Homes for Rent</caption>
                         <label id="cate">Search by Category
                             <select name="category_id">
@@ -173,15 +173,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                                 <?php
                                 $sql = "SELECT * FROM propertycategory";
 
-
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
                                     <option value="<?php echo $row['id'] ?>" <?php echo isset($_GET['category_id']) && $_GET['category_id'] == $row['id'] ? 'selected' : '' ?>><?php echo $row['category'] ?></option>
                                 <?php } ?>
                             </select>
-                            <button>Search</button>
+                            <button class="btn-search">Search</button>
                         </label>
+                        
                     </form>
                         <tr>
                             <th class="left-edge">Property Name</th>
@@ -201,7 +201,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                         $sql = "SELECT p.id, p.name, pc.category , p.rooms , p.location , p.rent_cost
                                 FROM property as p 
                                 join propertycategory as pc on pc.id=p.property_category_id
-                                WHERE $category  p.id NOT in (SELECT property_id FROM rentalapplication WHERE home_seeker_id={$_SESSION['id']})";
+                                WHERE $category  p.id NOT in (SELECT property_id FROM rentalapplication WHERE application_status_id = '0000')";
 
 
                         $result = mysqli_query($conn, $sql);
@@ -241,7 +241,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
 
 
     } else {
-        header('Location: homepage.php');
+        header('Location: homeowner.php');
     }
 } else {
     header('Location: homepage.php');

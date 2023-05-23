@@ -23,7 +23,7 @@
         exit;
       }
       if ($_SESSION['role'] != 'homeowner') {
-        header('Location: homepage.php');
+        header('Location: homeseeker.php');
         exit;
       }
        include 'db.con.php';
