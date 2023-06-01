@@ -23,13 +23,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                         (id, property_id, home_seeker_id, application_status_id) VALUE
                         ('$id',$property_id,{$_SESSION['id']},'0002')";
                 mysqli_query($conn, $sql);
-
             }
 
             header('Location: homeseeker.php');
             exit();
-        } 
-        ?>
+        }
+?>
 
         <!DOCTYPE html>
         <html>
@@ -41,8 +40,42 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
             <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
             <link rel="icon" type="image/png" sizes="32x32" href="icon/avicon-32x32.png">
             <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
             <link rel="manifest" href="icon/site.webmanifest">
         </head>
+
+        <script>
+            function changeCategory(select) {
+                newCategory = select.value;
+                const rows = document.getElementById('rows2');
+                $.ajax({
+                    url: "catFilter.php",
+                    dataType: "json",
+                    type: "POST",
+                    data: { category_id: newCategory },
+                    success: (res) => {
+                        console.log('suc', res);
+                        rows.innerHTML = '';
+                        for(i=0; i<res.length; i++) {
+                            row = res[i];
+                            rows.innerHTML += `<tr>
+                                    <td><a href="property-detail.php?id=${row['id'] }">${row['name']}</a></td>
+                                    <td>${row['category'] }</td>
+                                    <td>${row['rent_cost'] }/month</td>
+                                    <td>${row['rooms'] }</td>
+                                    <td>${row['location'] }</td>
+                                    <td class="apply"><a href="?apply_id=${row['id'] }">Apply</a></td>
+                                </tr>`;
+                        };
+                        if(res.length === 0) rows.innerHTML = `<td>No properties match current category!</td>`
+                    },
+                    error: (res) => {
+                        console.log('err', res)
+                    }
+
+                })
+            }
+        </script>
 
         <body>
             <header>
@@ -72,7 +105,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                     ?>
                     <div class="info">
                         <h2>Welcome
-                            <?php echo $id ?>!
+                            <?php echo $row['first_name'] ?>!
                         </h2>
                         <div class="info-details">
                             <div class="detail">
@@ -133,7 +166,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
 
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result)) {
-                            ?>
+                        ?>
 
                             <tr>
                                 <td>
@@ -161,28 +194,24 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                     </table>
 
 
+                    <div style="display:flex; justify-content:flex-end; align-items:center; width:100%">
+                        <label style='width:auto; align-self:auto'>Search by Category</label>
+                        <select name="category_id" onchange="changeCategory(this)" style='max-width:10rem; margin:0 3rem;'>
+                            <option value="">All</option>
+                            <?php
+                            $sql = "SELECT * FROM propertycategory";
+
+                            $result = mysqli_query($conn, $sql);
+                            while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                                <option value="<?php echo $row['id'] ?>" <?php echo isset($_GET['category_id']) && $_GET['category_id'] == $row['id'] ? 'selected' : '' ?>><?php echo $row['category'] ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
 
 
                     <table id="homes">
-
-                    <form class="search">
-                        <caption>Homes for Rent</caption>
-                        <label id="cate">Search by Category
-                            <select name="category_id">
-                                <option value="">All</option>
-                                <?php
-                                $sql = "SELECT * FROM propertycategory";
-
-                                $result = mysqli_query($conn, $sql);
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    ?>
-                                    <option value="<?php echo $row['id'] ?>" <?php echo isset($_GET['category_id']) && $_GET['category_id'] == $row['id'] ? 'selected' : '' ?>><?php echo $row['category'] ?></option>
-                                <?php } ?>
-                            </select>
-                            <button class="btn-search">Search</button>
-                        </label>
-                        
-                    </form>
+                    <caption>Homes for Rent</caption>
                         <tr>
                             <th class="left-edge">Property Name</th>
                             <th>Category</th>
@@ -191,6 +220,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                             <th>Location</th>
                             <th class="right-edge"></th>
                         </tr>
+                        <tbody id='rows2'>
                         <?php
 
                         $category = '';
@@ -205,30 +235,31 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
 
 
                         $result = mysqli_query($conn, $sql);
-                        if($result) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            ?>
-                            <tr>
-                                <td><a href="property-detail.php?id=<?php echo $row['id'] ?>">
-                                        <?php echo $row['name'] ?>
-                                    </a></td>
-                                <td>
-                                    <?php echo $row['category'] ?>
-                                </td>
-                                <td>
-                                    <?php echo $row['rent_cost'] ?>/month
-                                </td>
-                                <td>
-                                    <?php echo $row['rooms'] ?>
-                                </td>
-                                <td>
-                                    <?php echo $row['location'] ?>
-                                </td>
-                                <td class="apply"><a href="?apply_id=<?php echo $row['id'] ?>">Apply</a></td>
+                        if ($result) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                        ?>
+                                <tr>
+                                    <td><a href="property-detail.php?id=<?php echo $row['id'] ?>">
+                                            <?php echo $row['name'] ?>
+                                        </a></td>
+                                    <td>
+                                        <?php echo $row['category'] ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row['rent_cost'] ?>/month
+                                    </td>
+                                    <td>
+                                        <?php echo $row['rooms'] ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row['location'] ?>
+                                    </td>
+                                    <td class="apply"><a href="?apply_id=<?php echo $row['id'] ?>">Apply</a></td>
 
-                            </tr>
-                        <?php } } ?>
-
+                                </tr>
+                        <?php }
+                        } ?>
+                        </tbody>
                     </table>
                 </div>
 
@@ -237,7 +268,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
 
         </html>
 
-        <?php
+<?php
 
 
     } else {
