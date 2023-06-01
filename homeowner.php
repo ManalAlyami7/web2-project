@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -298,7 +296,20 @@ if(isset($_GET["method"])){
 </div>
 
 </main>
-   
+   <script>
+    function delete_property(id) {
+
+      data = "id=" + id;
+      xhr = new XMLHttpRequest();
+      xhr.open("POST", "delete.php");
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send(data);
+      xhr.onload = function() {
+        document.querySelector('#rec_' + id).remove();
+        document.querySelector("#res").innerHTML = this.responseText;
+      }
+    }
+</script>
 
 </body>
 </html>
