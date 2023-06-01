@@ -231,7 +231,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                         $sql = "SELECT p.id, p.name, pc.category , p.rooms , p.location , p.rent_cost
                                 FROM property as p 
                                 join propertycategory as pc on pc.id=p.property_category_id
-                                WHERE $category  p.id NOT in (SELECT property_id FROM rentalapplication WHERE application_status_id = '0000')";
+                                WHERE $category  p.id NOT in (SELECT property_id FROM rentalapplication WHERE home_seeker_id={$_SESSION['id']})";
 
 
                         $result = mysqli_query($conn, $sql);
